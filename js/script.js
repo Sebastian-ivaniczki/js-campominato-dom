@@ -37,7 +37,18 @@ const resetCells = () => {
       grid.removeChild(grid.firstChild);
     }
   }
+//! funzione per generare numeri randomici -------------------------
 
+const getRandomNumber = (min , max) => {
+  const numbers = [];
+  while (numbers.length <= max ) {
+    const randomNumber = Math.floor(Math.random() * max) + min;
+    if (!numbers.includes(randomNumber)) {
+      numbers.push(randomNumber);
+    }
+  }
+  return numbers;
+}
 
 
 let isReset = false;
