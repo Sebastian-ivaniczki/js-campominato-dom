@@ -38,6 +38,8 @@ const resetCells = () => {
     }
   }
 
+
+
 let isReset = false;
 let cellClas = ('')
 
@@ -71,16 +73,21 @@ button.addEventListener('click', function() {
     // Imposto isReset a false
     isReset = false;
   } else {
-   
+    // creo un contatre per il punteggio
+    counter = 0;
     for (let i = 1; i <= totalCells; i++) {
       const cell = createcell();
       cell.append(i);
-
+      
+      
       cell.addEventListener('click', function() {
         cell.classList.add('cliked');
+        cell.classList.add('disabled')
         console.log(i)
+        counter++;
+        
+        console.log(counter)
       });
-
       grid.appendChild(cell);
     }
     button.innerText = 'reset'
