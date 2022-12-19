@@ -62,66 +62,74 @@ const bombGenerator = (param) =>{
 } 
 
 
-console.log(bombs)
 
 let isReset = false;
 let cellClas = ('')
 
 button.addEventListener('click', function() {
-    dificultLevel = dificultLevelField.value
-    console.log(dificultLevel)
-    let rows = 0;
-    let colls = 0;
-    //! in base alla dificolta cambio i valori delle row delle cols e decido che classe aggiunger
-    if(dificultLevel === 'easy'){
-        rows = 10;
-        colls = 10;
-        cellClas = ('easy')
-    }else if (dificultLevel === 'medium'){
-        rows = 9;
-        colls = 9;
-        cellClas = ('medium')
-    }else if(dificultLevel === 'hard'){
-        rows = 7;
-        colls = 7;
+  dificultLevel = dificultLevelField.value
+  console.log(dificultLevel)
+  let rows = 0;
+  let colls = 0;
+  //! in base alla dificolta cambio i valori delle row delle cols e decido che classe aggiunger
+  if(dificultLevel === 'easy'){
+    rows = 10;
+    colls = 10;
+    cellClas = ('easy')
+  }else if (dificultLevel === 'medium'){
+    rows = 9;
+    colls = 9;
+    cellClas = ('medium')
+  }else if(dificultLevel === 'hard'){
+    rows = 7;
+    colls = 7;
         cellClas = ('hard')
-    }
-
-   
-    const totalCells = rows * colls;
-    // genero un avento al clik del bottone
-
-    if (isReset) {
-    resetCells()
-    button.innerText = 'new game'
-    // Imposto isReset a false
-    isReset = false;
-  } else {
-    // creo un contatre per il punteggio
-    counter = 0;
-    for (let i = 1; i <= totalCells; i++) {
-      const cell = createcell();
-      cell.append(i);
+      }
       
       
-      cell.addEventListener('click', function() {
-        cell.classList.add('cliked');
-        cell.classList.add('disabled')
-        console.log(i)
-        counter++;
-        
-        console.log(counter)
-      });
-      grid.appendChild(cell);
-    }
+      const totalCells = rows * colls;
+      // genero un avento al clik del bottone
+      
+      if (isReset) {
+        resetCells()
+        button.innerText = 'new game'
+        // Imposto isReset a false
+        isReset = false;
+      } else {
+        // creo un contatre per il punteggio
+        counter = 0;
+        for (let i = 1; i <= totalCells; i++) {
+          const cell = createcell();
+          cell.innerText = i;
+          
+          
+          cell.addEventListener('click', function() {
+            cell.classList.add('cliked');
+            cell.classList.add('disabled')
+            console.log(i)
+            counter++;
+            
+            bombGenerator(totalCells)
+            console.log(bombs)
+            console.log(this.innerText)
+            if(bombs.includes(parseInt(this.innerText))){
+              cell.classList.add('bomb')
+             
+             
+              alert(`Game Over il tuo punteggio è: ${counter} punti`)
+            }
+            console.log(counter)
+          });
+          grid.appendChild(cell);
+        }
+
+        button.innerText = 'reset'
+        // Imposto isReset a true
+        isReset = true;
+      }
+    });
+
+
     
-   
-    button.innerText = 'reset'
-    // Imposto isReset a true
-    isReset = true;
-  }
-});
-
-
-
-
+    
+    
