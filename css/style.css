@@ -49,6 +49,9 @@ section{
     justify-content: center;
     border: 1px solid rgb(0, 0, 0);
 }
+.bomb{
+    background-color: rgb(247, 0, 0);
+}
 .disabled {
     
     pointer-events: none;

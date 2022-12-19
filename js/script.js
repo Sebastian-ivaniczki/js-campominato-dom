@@ -22,6 +22,9 @@ Quando la partita termina dobbiamo capire se è terminata perchè è stata clicc
 const button = document.getElementById('play');
 const grid = document.getElementById('my-container');
 const dificultLevelField = document.getElementById('difficult-level');
+//creazione aray
+const bombs = []
+
 
 //! creo una funzione per generare le caselle ---------------
 
@@ -39,17 +42,27 @@ const resetCells = () => {
   }
 //! funzione per generare numeri randomici -------------------------
 
-const getRandomNumber = (min , max) => {
-  const numbers = [];
-  while (numbers.length <= max ) {
-    const randomNumber = Math.floor(Math.random() * max) + min;
-    if (!numbers.includes(randomNumber)) {
-      numbers.push(randomNumber);
-    }
-  }
-  return numbers;
+const getRandomNumber =(min , max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+
+//! FUNZIONE PER PRENDERE 16 NUMERI CASUALI NEL RANGE ---------------------------
+
+const bombGenerator = (param) =>{
+  let bombNumber;
+  while(bombs.length < 16){
+      bombNumber =  getRandomNumber(1, param);
+      if(bombs.includes(bombNumber)){
+         
+      }else if(!bombs.includes(bombNumber)){
+          bombs.push(bombNumber);
+      }
+  }
+} 
+
+
+console.log(bombs)
 
 let isReset = false;
 let cellClas = ('')
@@ -101,6 +114,8 @@ button.addEventListener('click', function() {
       });
       grid.appendChild(cell);
     }
+    
+   
     button.innerText = 'reset'
     // Imposto isReset a true
     isReset = true;
