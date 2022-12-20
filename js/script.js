@@ -63,11 +63,12 @@ const bombGenerator = (param) =>{
 } 
 
 
-
+let gameOver = false;
 let isReset = false;
 let cellClas = ('')
 
 button.addEventListener('click', function() {
+  gameOver = false;
   dificultLevel = dificultLevelField.value
   console.log(dificultLevel)
   let rows = 0;
@@ -105,29 +106,32 @@ button.addEventListener('click', function() {
          
           
           cell.addEventListener('click', function() {
-            cell.classList.add('cliked');
-            cell.classList.add('disabled')
+            if(gameOver || cell.classList.contains('cliked')){
+              return
+            }
             
-            console.log(i)
+            cell.classList.add('cliked');
+            
             counter++;
             
             bombGenerator(totalCells)
-            console.log(bombs)
-            console.log(this.innerText)
+          
             if(bombs.includes(parseInt(this.innerText))){
               cell.classList.remove('cliked')
               cell.classList.add('bomb')
+              gameOver = true;
               alert(`Game Over il tuo punteggio è: ${counter} punti`)
             }
 
             if(counter == totalCells - 16){
               alert('You win')
+              gameOver = true;
             }
             console.log(counter)
           });
           grid.appendChild(cell);
         }
-        console.log(cellArr)
+       
 
         button.innerText = 'reset'
         // Imposto isReset a true

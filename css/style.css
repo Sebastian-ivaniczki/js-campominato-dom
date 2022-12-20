@@ -52,10 +52,7 @@ section{
 .bomb{
     background-color: rgb(247, 0, 0);
 }
-.disabled {
-    
-    pointer-events: none;
-  }
+
 .cell.cliked{
     background-color: blue;
 }
