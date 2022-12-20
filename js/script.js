@@ -26,6 +26,7 @@ const dificultLevelField = document.getElementById('difficult-level');
 const bombs = []
 
 
+
 //! creo una funzione per generare le caselle ---------------
 
 const createcell = () => {
@@ -101,11 +102,12 @@ button.addEventListener('click', function() {
         for (let i = 1; i <= totalCells; i++) {
           const cell = createcell();
           cell.innerText = i;
-          
+         
           
           cell.addEventListener('click', function() {
             cell.classList.add('cliked');
             cell.classList.add('disabled')
+            
             console.log(i)
             counter++;
             
@@ -113,15 +115,19 @@ button.addEventListener('click', function() {
             console.log(bombs)
             console.log(this.innerText)
             if(bombs.includes(parseInt(this.innerText))){
+              cell.classList.remove('cliked')
               cell.classList.add('bomb')
-             
-             
               alert(`Game Over il tuo punteggio è: ${counter} punti`)
+            }
+
+            if(counter == totalCells - 16){
+              alert('You win')
             }
             console.log(counter)
           });
           grid.appendChild(cell);
         }
+        console.log(cellArr)
 
         button.innerText = 'reset'
         // Imposto isReset a true
